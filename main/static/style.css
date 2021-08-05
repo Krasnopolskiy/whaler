@@ -1,0 +1,9 @@
+body {
+    color: #fff !important;
+}
+
+input[name="address"] {
+    background-color: rgba(0, 0, 0, 0);
+    color: #fff;
+    font-weight: 600;
+}
