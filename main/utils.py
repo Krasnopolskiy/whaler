@@ -15,4 +15,4 @@ def get_env_settings(setting, default=None):
         if default:
             return default
         else:
-            raise ImproperlyConfigured(f"{setting} is empty")
+            raise ImproperlyConfigured(f'{setting} is empty')

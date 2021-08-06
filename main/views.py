@@ -6,10 +6,18 @@ from django.views import View
 from main.heuristics.certificate import CertificateHeuristic
 from main.heuristics.checker import Checker
 from main.heuristics.database import DatabaseHeuristic
-from main.heuristics.safebrowsing import SafeBrowsingHeuristic
+from main.heuristics.google_safebrowsing import GoogleSafeBrowsingHeuristic
+from main.heuristics.yandex_safebrowsing import YandexSafeBrowsingHeuristic
 
 
-CHECKER = Checker([DatabaseHeuristic, CertificateHeuristic, SafeBrowsingHeuristic])
+CHECKER = Checker(
+    [
+        DatabaseHeuristic,
+        CertificateHeuristic,
+        GoogleSafeBrowsingHeuristic,
+        YandexSafeBrowsingHeuristic,
+    ]
+)
 
 
 class IndexView(View):

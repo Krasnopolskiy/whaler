@@ -1,3 +1,4 @@
+./utils/pysafebrowsing/
 django==3.2.6
 pysafebrowsing==0.1.1
 requests==2.26.0
