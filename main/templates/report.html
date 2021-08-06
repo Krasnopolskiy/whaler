@@ -12,19 +12,21 @@
     <div class="row p-3">
         <div class="col">
             <h1 class="title">Отчеты от пользователей</h1>
+            {% for report in reports %}
             <div class="bg-blur rounded-3 p-3 m-3">
                 <div class="row">
                     <div class="col-8">
-                        <p class="font-monospace mb-0 pt-2">http://gkjx168.com/images</p>
+                        <p class="font-monospace mb-0 pt-2">{{ report.1 }}</p>
                     </div>
                     <div class="col-2">
-                        <a href="#" class="btn btn-primary">Добавить в базу</a>
+                        <a href="{% url 'report_accept' pk=report.0 %}" class="btn btn-primary">Добавить в базу</a>
                     </div>
                     <div class="col-2">
-                        <a href="#" class="btn btn-secondary">Отклонить</a>
+                        <a href="{% url 'report_decline' pk=report.0 %}" class="btn btn-secondary">Отклонить</a>
                     </div>
                 </div>
             </div>
+            {% endfor %}
         </div>
     </div>
 </div>

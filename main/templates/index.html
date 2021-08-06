@@ -66,7 +66,12 @@
                     <span class="badge bg-danger">представляет угрозу</span>
                     {% endif %}
                 </h4>
-                <p>Считаете этот сайт опасным? <a class="href-black" href="#">Пометить как фишинг</a></p>
+                <p>Считаете этот сайт опасным?</p>
+                <form action="{% url 'report' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="address" value="{{ address }}">
+                    <input type="submit" class="btn btn-dark" value="Пометить как фишинг">
+                </form>
             </div>
         </div>
     </div>
