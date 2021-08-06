@@ -12,6 +12,7 @@
             "args": [
                 "runserver"
             ],
+            "envFile": "${workspaceFolder}/.env",
             "django": true
         }
     ]

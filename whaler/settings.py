@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 
+from main.utils import get_env_settings
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -83,6 +85,10 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'main/databases/phishing.db',
     },
+    'reports': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'main/databases/reports.db',
+    },
 }
 
 
@@ -122,3 +128,7 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+YANDEX_SAFE_BROWSING_KEY = get_env_settings('YANDEX_SAFE_BROWSING_KEY')
+
+GOOGLE_SAFE_BROWSING_KEY = get_env_settings('GOOGLE_SAFE_BROWSING_KEY')

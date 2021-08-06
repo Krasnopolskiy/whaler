@@ -1,5 +1,6 @@
-from main.heuristics.base import Heuristic
 from typing import Dict, List
+
+from main.heuristics.base import Heuristic
 
 
 class Checker:

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row p-3">
+        <div class="col">
+            <h1 class="title ff-postnobill display-4 text-center text-uppercase">
+                Whaler <span class="fs-3">[admin]</span>
+            </h1>
+        </div>
+    </div>
+    <div class="row p-3">
+        <div class="col">
+            <h1 class="title">Отчеты от пользователей</h1>
+            {% for report in reports %}
+            <div class="bg-blur rounded-3 p-3 m-3">
+                <div class="row">
+                    <div class="col-8">
+                        <p class="font-monospace mb-0 pt-2">{{ report.1 }}</p>
+                    </div>
+                    <div class="col-2">
+                        <a href="{% url 'report_accept' pk=report.0 %}" class="btn btn-primary">Добавить в базу</a>
+                    </div>
+                    <div class="col-2">
+                        <a href="{% url 'report_decline' pk=report.0 %}" class="btn btn-secondary">Отклонить</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock content %}
