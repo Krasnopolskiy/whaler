@@ -11,7 +11,7 @@ CHECKER = Checker([DatabaseHeuristic])
 
 class IndexView(View):
     context = {}
-    
+
     def get(self, request: HttpRequest) -> HttpResponse:
         return render(request, 'index.html')
 

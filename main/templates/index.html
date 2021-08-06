@@ -43,8 +43,44 @@
                 </form>
             </div>
         </div>
+        <div class="row d-flex justify-content-center px-5">
+            <div class="col">
+                {% if result %}
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Проверка</th>
+                            <th scope="col">Результат</th>
+                            <th scope="col">Оценка</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for check in result.checks %}
+                        <tr>
+                            <th scope="row">{{ forloop.counter }}</th>
+                            <td>{{ check.name }}</td>
+                            <td>
+                                <span
+                                    class="badge {% if check.result.phishing %}bg-danger{% else %}bg-success{% endif %}">
+                                    {{ check.result.comment }}
+                                </span>
+                            </td>
+                            <td class="font-monospace">{{ check.result.score }}%</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <h4 class="display-6 text-end my-5">Итоговая оценка: <span class="font-monospace">{{ result.overall }}%</span></h4>
+                {% endif %}
+            </div>
+        </div>
+        <div class="row px-5">
+            <div class="col d-grid">
+                <button class="btn btn-danger">Отметить как фишинг</button>
+            </div>
+        </div>
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous">
     </script>

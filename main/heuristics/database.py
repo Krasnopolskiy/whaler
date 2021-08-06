@@ -7,7 +7,12 @@ from tldextract import extract
 
 class DatabaseHeuristic(Heuristic):
     def __init__(self) -> None:
-        super().__init__('Наличие в базах данных фишинговых сайтов', 100)
+        super().__init__(
+            name='Наличие в базах данных фишинговых сайтов',
+            score=100,
+            good='Не обнаружено',
+            bad='Обнаружено',
+        )
 
     def process(self, address: str) -> Dict[str, int]:
         address = extract(address)
