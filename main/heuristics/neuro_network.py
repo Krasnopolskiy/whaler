@@ -16,6 +16,6 @@ class NeuroNetworkHeuristic(Heuristic):
 
     def process(self, address: str) -> Dict[str, int]:
         domain = self.extract_domain(address)
-        malicious = make_prediction(domain)
-        self.result = self.conditions['bad'] if malicious else self.conditions['good']
+        is_good = make_prediction(domain)
+        self.result = self.conditions['good'] if is_good else self.conditions['bad']
         return super().process(address)
