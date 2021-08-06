@@ -162,6 +162,9 @@ def forwarding(response):
 
 
 def feature_extraction(url):
+    if url[:4] != 'http':
+        url = 'http://' + url
+
     features = []
 
     features.append(if_ip(url))
@@ -192,5 +195,13 @@ def feature_extraction(url):
     features.append(forwarding(response))
 
     return features
+
+
+def make_prediction(url):
+    loaded_model = pickle.load(open('ai/finalized_model.sav', 'rb'))
+    a = feature_extraction(url)
+    b = np.array(a).reshape(1, -1)
+    return loaded_model.predict(b)
+
 
 
