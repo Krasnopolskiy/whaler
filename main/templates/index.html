@@ -61,23 +61,25 @@
                             <th scope="row">{{ forloop.counter }}</th>
                             <td>{{ check.name }}</td>
                             <td>
-                                <span
-                                    class="badge {% if check.result.phishing %}bg-danger{% else %}bg-success{% endif %}">
-                                    {{ check.result.comment }}
-                                </span>
+                                {% if check.result.phishing == 0 %}
+                                <span class="badge bg-success">{{ check.result.comment }}</span>
+                                {% elif check.result.phishing == 1%}
+                                <span class="badge bg-warning">{{ check.result.comment }}</span>
+                                {% elif check.result.phishing == 2%}
+                                <span class="badge bg-danger">{{ check.result.comment }}</span>
+                                {% endif %}
                             </td>
                             <td class="font-monospace">{{ check.result.score }}%</td>
                         </tr>
                         {% endfor %}
                     </tbody>
                 </table>
-                <h4 class="display-6 text-end my-5">Итоговая оценка: <span class="font-monospace">{{ result.overall }}%</span></h4>
+                <h4 class="display-6 text-end my-5">Итоговая оценка: <span
+                        class="font-monospace">{{ result.overall }}%</span></h4>
+                <div class="col d-grid my-5">
+                    <button class="btn btn-danger">Отметить как фишинг</button>
+                </div>
                 {% endif %}
-            </div>
-        </div>
-        <div class="row px-5">
-            <div class="col d-grid">
-                <button class="btn btn-danger">Отметить как фишинг</button>
             </div>
         </div>
     </div>
