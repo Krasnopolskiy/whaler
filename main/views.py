@@ -7,15 +7,16 @@ from main.heuristics.certificate import CertificateHeuristic
 from main.heuristics.checker import Checker
 from main.heuristics.database import DatabaseHeuristic
 from main.heuristics.google_safebrowsing import GoogleSafeBrowsingHeuristic
+from main.heuristics.neuro_network import NeuroNetworkHeuristic
 from main.heuristics.yandex_safebrowsing import YandexSafeBrowsingHeuristic
-
 
 CHECKER = Checker(
     [
-        DatabaseHeuristic,
-        CertificateHeuristic,
+        NeuroNetworkHeuristic,
         GoogleSafeBrowsingHeuristic,
         YandexSafeBrowsingHeuristic,
+        DatabaseHeuristic,
+        CertificateHeuristic,
     ]
 )
 

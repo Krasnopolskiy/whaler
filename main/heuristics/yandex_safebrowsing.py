@@ -1,12 +1,12 @@
 from typing import Dict
-from whaler.settings import YANDEX_SAFE_BROWSING_KEY
 
 from main.heuristics.base import Heuristic
 from pysafebrowsing import SafeBrowsing
+from whaler.settings import YANDEX_SAFE_BROWSING_KEY
 
 
 class YandexSafeBrowsingHeuristic(Heuristic):
-    def __init__(self, **kwargs) -> None:
+    def __init__(self) -> None:
         super().__init__(
             'Yandex Safe Browsing',
             {
