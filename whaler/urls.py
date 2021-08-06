@@ -1,4 +1,10 @@
-from main.views import IndexView, ReportAcceptView, ReportDeclineView, ReportListView, ReportView
+from main.views import (
+    IndexView,
+    ReportAcceptView,
+    ReportDeclineView,
+    ReportListView,
+    ReportView,
+)
 from django.urls import path
 from django.contrib import admin
 
