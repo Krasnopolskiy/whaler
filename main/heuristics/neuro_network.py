@@ -10,7 +10,7 @@ class NeuroNetworkHeuristic(Heuristic):
             'Оценка нейросети',
             {
                 'good': {'score': 0, 'comment': 'Угроза не обнаружена', 'phishing': 0},
-                'bad': {'score': 60, 'comment': 'Потенциальная угроза', 'phishing': 2},
+                'bad': {'score': 35, 'comment': 'Потенциальная угроза', 'phishing': 2},
             },
         )
 
