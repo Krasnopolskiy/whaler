@@ -5,8 +5,12 @@ from typing import Dict
 from main.heuristics.base import Heuristic
 from tldextract import extract
 
-
+ISSUERS = {
+    'R3': 2,
+    'ZeroSSL RSA Domain Secure Site CA': 2
+}
 class CertificateHeuristic(Heuristic):
+
     def __init__(self) -> None:
         super().__init__(
             name="Рейтинг сертификата",
@@ -14,7 +18,7 @@ class CertificateHeuristic(Heuristic):
             good="Нет подозрений",
             bad="Есть подозрения",
         )
-
+    
     def process(self, address: str) -> Dict[str, int]:
         address = extract(address)
         domain = ".".join((address.domain, address.suffix))
@@ -37,5 +41,5 @@ class CertificateHeuristic(Heuristic):
 
     def get_cert_rate(self, host):
         _, issuer = self.get_cert_info(host)
-        rate = issuer.get("commonName", 0)
+        rate = ISSUERS.get(issuer["commonName"], 0)
         return rate
