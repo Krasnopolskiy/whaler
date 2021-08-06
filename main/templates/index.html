@@ -74,7 +74,14 @@
             <div class="col-10">
                 <div class="p-3 bg-blur">
                     <h4 class="text-center">
-                        Итоговая оценка: <span class="font-monospace">{{ result.overall }}%</span> &#8213; Сайт безопасен
+                        Итоговая оценка: <span class="font-monospace">{{ result.overall }}%</span> &nbsp;&#8213;&nbsp;
+                        {% if result.overall <= 40 %}
+                            сайт безопасен
+                        {% elif result.overall > 40 and result.overall <= 70 %}
+                            сайт потенциально опасен
+                        {% elif result.overall > 70 %}
+                            сайт представляет угрозу
+                        {% endif %}
                     </h4>
                     <p>Считаете этот сайт опасным? <a class="href-black" href="#">Пометить как фишинг</a></p>
                 </div>
