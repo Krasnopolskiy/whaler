@@ -18,7 +18,8 @@ class YandexSafeBrowsingHeuristic(Heuristic):
     def process(self, address: str) -> Dict[str, int]:
         domain = self.extract_domain(address)
         api = SafeBrowsing(
-            YANDEX_SAFE_BROWSING_KEY, api_url='https://sba.yandex.net/v4/threatMatches:find'
+            YANDEX_SAFE_BROWSING_KEY,
+            api_url='https://sba.yandex.net/v4/threatMatches:find',
         )
         malicious = api.lookup_url(domain)['malicious']
         self.result = self.conditions['bad'] if malicious else self.conditions['good']
