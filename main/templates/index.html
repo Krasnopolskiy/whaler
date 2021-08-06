@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row p-5">
+        <div class="col title">
+            <h1 class="ff-postnobill display-1 text-center text-uppercase">Whaler</h1>
+            <h4 class="text-center">сервис антифишинга</h4>
+        </div>
+    </div>
+    <div class="row d-flex justify-content-center p-5 pt-0">
+        <div class="col-10">
+            <div class="bg-blur rounded-3 p-3">
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-10">
+                            <input type="text" name="address" class="form-control form-control-lg"
+                                placeholder="google.com" {% if address %}value="{{ address }}" {% endif %}>
+                        </div>
+                        <div class="col-2 d-grid">
+                            <button type="submit" class="btn btn-secondary fs-6">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% if result %}
+    <div class="row d-flex justify-content-center px-3">
+        {% for check in result.checks %}
+        <div class="col-4 my-3">
+            <div class="card h-100 bg-blur rounded-3 p-3">
+                <div class="card-body">
+                    <h4 class="text-center card-title">{{ check.name }}</h4>
+                </div>
+                <div class="card-footer">
+                    {% if check.result.phishing == 0 %}
+                    <p class="badge bg-success fs-5">{{ check.result.comment }}</p>
+                    {% elif check.result.phishing == 1%}
+                    <p class="badge bg-warning fs-5">{{ check.result.comment }}</span>
+                        {% elif check.result.phishing == 2%}
+                        <p class="badge bg-danger fs-5">{{ check.result.comment }}</p>
+                        {% endif %}
+                        <hr>
+                        <p class="text-end fs-5">Оценка угрозы <span
+                                class="font-monospace">{{ check.result.score }}%</span></p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="row d-flex justify-content-center p-5">
+        <div class="col-10">
+            <div class="p-3 bg-blur">
+                <h4 class="text-center">
+                    Итоговая оценка угрозы: <span class="font-monospace">{{ result.overall }}%</span>
+                    &nbsp;&#8213;&nbsp;
+                    {% if result.overall <= 40 %}
+                    <span class="badge bg-success">безопасно</span>
+                    {% elif result.overall > 40 and result.overall <= 70 %}
+                    <span class="badge bg-warning">потенциально опасно</span>
+                    {% elif result.overall > 70 %}
+                    <span class="badge bg-danger">представляет угрозу</span>
+                    {% endif %}
+                </h4>
+                <p>Считаете этот сайт опасным?</p>
+                <form action="{% url 'report' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="address" value="{{ address }}">
+                    <input type="submit" class="btn btn-dark" value="Пометить как фишинг">
+                </form>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock content %}

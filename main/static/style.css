@@ -1,0 +1,55 @@
+@font-face {
+    font-family: 'post_no_bills_colombosemibold';
+    src: url('/static/postnobill.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    background-image: url("/static/background.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+}
+
+.title, footer {
+    color: #fff;
+}
+
+.ff-postnobill {
+    font-family: 'post_no_bills_colombosemibold';
+}
+
+.bg-blur {
+    backdrop-filter: blur(4px);
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+input[name="address"] {
+    background-color: rgba(0, 0, 0, 0);
+    color: #000;
+    font-weight: 600;
+    border-width: 2px;
+}
+
+p.badge {
+    display: block;
+    width: 100%;
+    font-weight: 400 !important;
+}
+
+.card-footer {
+    background-color: rgba(0, 0, 0, 0);
+    border: 0;
+}
+
+.href-black {
+    color: #000 !important;
+}
