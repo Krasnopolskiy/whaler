@@ -21,4 +21,5 @@ class IndexView(View):
         if address is None:
             return redirect(reverse('index'))
         self.context['result'] = CHECKER.process(address)
+        self.context['address'] = address
         return render(request, 'index.html', self.context)
