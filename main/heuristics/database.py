@@ -9,7 +9,6 @@ class DatabaseHeuristic(Heuristic):
         super().__init__(
             'Наличие в базах данных фишинговых сайтов',
             {
-                'unknow': {'score': 0, 'comment': '', 'phishing': 0},
                 'good': {'score': 0, 'comment': 'Не обнаружено', 'phishing': 0},
                 'bad': {'score': 100, 'comment': 'Обнаружено', 'phishing': 2},
             }

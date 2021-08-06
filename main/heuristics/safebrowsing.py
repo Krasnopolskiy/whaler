@@ -1,7 +1,7 @@
 from typing import Dict
 
 from main.heuristics.base import Heuristic
-from requests import post
+from pysafebrowsing import SafeBrowsing
 
 
 class SafeBrowsingHeuristic(Heuristic):
@@ -9,12 +9,16 @@ class SafeBrowsingHeuristic(Heuristic):
 
     def __init__(self, **kwargs) -> None:
         super().__init__(
-            name='Google Safe Browsing',
-            score=100,
-            good='Не обнаружено',
-            bad='Обнаружено',
+            'Google Safe Browsing',
+            {
+                'good': {'score': 0, 'comment': 'Не обнаружено', 'phishing': 0},
+                'bad': {'score': 100, 'comment': 'Вредоносный', 'phishing': 2},
+            }
         )
 
     def process(self, address: str) -> Dict[str, int]:
         domain = self.extract_domain(address)
+        api = SafeBrowsing(self.GOOGLE_API_KEY)
+        malicious = api.lookup_url(domain)['malicious']
+        self.result = self.conditions['bad'] if malicious else self.conditions['good']
         return super().process(address)
