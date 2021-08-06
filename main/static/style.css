@@ -1,13 +1,30 @@
 body {
-    color: #fff !important;
+    background-image: url("/static/background.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.title {
+    color: #fff;
+}
+
+.bg-blur {
+    backdrop-filter: blur(4px);
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
 input[name="address"] {
     background-color: rgba(0, 0, 0, 0);
-    color: #fff;
+    color: #000;
     font-weight: 600;
+    border-width: 2px;
 }
 
 .table {
-    color: #fff;
+    font-weight: 700;
+}
+
+tr {
+    border-bottom: 1px solid #000;
 }
