@@ -1,7 +1,7 @@
 from typing import Dict
 
 from main.heuristics.base import Heuristic
-from pysafebrowsing import SafeBrowsing
+from requests import post
 
 
 class SafeBrowsingHeuristic(Heuristic):
@@ -17,6 +17,4 @@ class SafeBrowsingHeuristic(Heuristic):
 
     def process(self, address: str) -> Dict[str, int]:
         domain = self.extract_domain(address)
-        safe_browsing = SafeBrowsing(self.GOOGLE_API_KEY)
-        result = safe_browsing.lookup_url(domain)
-        return result
+        return super().process(address)
