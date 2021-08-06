@@ -6,7 +6,7 @@ from whaler.settings import GOOGLE_SAFE_BROWSING_KEY
 
 
 class GoogleSafeBrowsingHeuristic(Heuristic):
-    def __init__(self, **kwargs) -> None:
+    def __init__(self) -> None:
         super().__init__(
             'Google Safe Browsing',
             {

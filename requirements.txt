@@ -1,4 +1,9 @@
 ./utils/pysafebrowsing/
+beautifulsoup4==4.9.3
 django==3.2.6
+lxml==4.6.3
+numpy==1.21.1
 requests==2.26.0
+scikit-learn-0.24.2
 tldextract==3.1.0
+whois==0.9.13
