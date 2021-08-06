@@ -1,16 +1,17 @@
-from typing import Dict
+from typing import Dict, List
+from tldextract import extract
 
 
 class Heuristic:
-    def __init__(self, **kwargs) -> None:
-        for key in ('name', 'score', 'good', 'bad'):
-            setattr(self, key, kwargs.get(key))
-        self.phishing: bool = False
+    def __init__(self, name, conditions) -> None:
+        self.name: str = name
+        self.conditions: Dict = conditions
+        self.result: Dict = None
 
     def process(self, address: str) -> Dict[str, int]:
-        return {
-            'name': self.name,
-            'result': {'phishing': True, 'comment': self.bad, 'score': self.score}
-            if self.phishing
-            else {'phishing': False, 'comment': self.good, 'score': 0},
-        }
+        return {'name': self.name, 'result': self.result}
+
+    @staticmethod
+    def extract_domain(address: str) -> str:
+        address = extract(address)
+        return '.'.join((address.domain, address.suffix))

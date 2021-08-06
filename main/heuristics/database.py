@@ -8,10 +8,12 @@ from tldextract import extract
 class DatabaseHeuristic(Heuristic):
     def __init__(self) -> None:
         super().__init__(
-            name='Наличие в базах данных фишинговых сайтов',
-            score=100,
-            good='Не обнаружено',
-            bad='Обнаружено',
+            'Наличие в базах данных фишинговых сайтов',
+            {
+                'unknow': {'score': 0, 'comment': '', 'phishing': 0},
+                'good': {'score': 0, 'comment': 'Не обнаружено', 'phishing': 0},
+                'bad': {'score': 100, 'comment': 'Обнаружено', 'phishing': 2},
+            }
         )
 
     def process(self, address: str) -> Dict[str, int]:
@@ -20,5 +22,5 @@ class DatabaseHeuristic(Heuristic):
         with connections['phishing'].cursor() as cursor:
             cursor.execute('SELECT domain FROM domains WHERE domain==%s', [domain])
             row = cursor.fetchone()
-            self.phishing = row is not None
+            self.result = self.conditions['good'] if row is None else self.conditions['bad']
         return super().process(address)

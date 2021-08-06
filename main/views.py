@@ -1,12 +1,13 @@
-from main.heuristics.database import DatabaseHeuristic
-from main.heuristics.checker import Checker
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.views import View
 
+from main.heuristics.certificate import CertificateHeuristic
+from main.heuristics.checker import Checker
+from main.heuristics.database import DatabaseHeuristic
 
-CHECKER = Checker([DatabaseHeuristic])
+CHECKER = Checker([DatabaseHeuristic, CertificateHeuristic])
 
 
 class IndexView(View):
