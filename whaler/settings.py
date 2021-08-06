@@ -85,6 +85,10 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'main/databases/phishing.db',
     },
+    'reports': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'main/databases/reports.db',
+    },
 }
 
 
