@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'post_no_bills_colombosemibold';
-    src: url('/static/postnobillscolombo-semibold-webfont.woff') format('woff');
+    src: url('/static/postnobill.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
@@ -10,13 +10,20 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
 }
 
 .title, footer {
     color: #fff;
 }
 
-.ff-post {
+.ff-postnobill {
     font-family: 'post_no_bills_colombosemibold';
 }
 
