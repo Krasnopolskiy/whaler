@@ -198,9 +198,12 @@ def feature_extraction(url):
 
 
 def make_prediction(url):
-    dirname = os.path.dirname(__file__)
-    filename = os.path.join(dirname, 'finalized_model.sav')
-    loaded_model = pickle.load(open(filename, 'rb'))
-    a = feature_extraction(url)
-    b = np.array(a).reshape(1, -1)
-    return loaded_model.predict(b)
+    try:
+        dirname = os.path.dirname(__file__)
+        filename = os.path.join(dirname, 'finalized_model.sav')
+        loaded_model = pickle.load(open(filename, 'rb'))
+        a = feature_extraction(url)
+        b = np.array(a).reshape(1, -1)
+        return loaded_model.predict(b)
+    except:
+        return 0
