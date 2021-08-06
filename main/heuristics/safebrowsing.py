@@ -13,7 +13,7 @@ class SafeBrowsingHeuristic(Heuristic):
             {
                 'good': {'score': 0, 'comment': 'Не обнаружено', 'phishing': 0},
                 'bad': {'score': 100, 'comment': 'Вредоносный', 'phishing': 2},
-            }
+            },
         )
 
     def process(self, address: str) -> Dict[str, int]:

@@ -13,8 +13,16 @@ class CertificateHeuristic(Heuristic):
             'Сертификат',
             {
                 'unknown': {'score': 15, 'comment': 'Не обнаружен', 'phishing': 2},
-                'good': {'score': 0, 'comment': 'Действительный сертификат', 'phishing': 0},
-                'bad': {'score': 10, 'comment': 'Самоподписанный сертификат', 'phishing': 1},
+                'good': {
+                    'score': 0,
+                    'comment': 'Действительный сертификат',
+                    'phishing': 0,
+                },
+                'bad': {
+                    'score': 10,
+                    'comment': 'Самоподписанный сертификат',
+                    'phishing': 1,
+                },
             },
         )
 
