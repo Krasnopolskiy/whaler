@@ -9,9 +9,10 @@ RUN mkdir -p $APP_HOME
 WORKDIR $APP_HOME
 
 COPY requirements.txt .
-RUN pip install -r requirements.txt
+COPY utils utils
+RUN pip install --no-cache-dir -r requirements.txt
 COPY . $APP_HOME
 
 USER kekpass
 
-CMD ["python", "manage.py", "runserver"]
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]

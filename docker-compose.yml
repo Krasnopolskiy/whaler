@@ -5,8 +5,8 @@ services:
     restart: unless-stopped
     build: .
     expose:
-      - 31337
+      - 8000
     ports:
-      - "31337:31337"
+      - "8000:8000"
     env_file:
       - .env
