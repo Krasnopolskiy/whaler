@@ -1,4 +1,5 @@
 from typing import Dict
+from tldextract import extract
 
 
 class Heuristic:
@@ -14,3 +15,8 @@ class Heuristic:
             if self.phishing
             else {'phishing': False, 'comment': self.good, 'score': 0},
         }
+
+    @staticmethod
+    def extract_domain(address: str) -> str:
+        address = extract(address)
+        return '.'.join((address.domain, address.suffix))

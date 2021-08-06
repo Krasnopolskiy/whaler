@@ -2,7 +2,6 @@ from typing import Dict
 
 from django.db import connections
 from main.heuristics.base import Heuristic
-from tldextract import extract
 
 
 class DatabaseHeuristic(Heuristic):
@@ -15,8 +14,7 @@ class DatabaseHeuristic(Heuristic):
         )
 
     def process(self, address: str) -> Dict[str, int]:
-        address = extract(address)
-        domain = '.'.join((address.domain, address.suffix))
+        domain = self.extract_domain(address)
         with connections['phishing'].cursor() as cursor:
             cursor.execute('SELECT domain FROM domains WHERE domain==%s', [domain])
             row = cursor.fetchone()
