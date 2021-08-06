@@ -2,9 +2,7 @@ from socket import socket
 from ssl import create_default_context
 from typing import Dict
 
-import requests
 from main.heuristics.base import Heuristic
-from requests.exceptions import SSLError
 
 
 class CertificateHeuristic(Heuristic):
@@ -31,15 +29,12 @@ class CertificateHeuristic(Heuristic):
     def process(self, address: str) -> Dict[str, int]:
         domain = self.extract_domain(address)
         try:
-            _ = requests.get(f'https://{domain}', verify=True)
             issuer = self.get_cert_info(domain)
             self.result = (
                 self.conditions['bad']
                 if issuer in self.ISSUERS
                 else self.conditions['good']
             )
-        except SSLError as err:
-            self.result = self.conditions['bad']
         except:
             self.result = self.conditions['unknown']
         return super().process(address)
