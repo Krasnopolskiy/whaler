@@ -21,68 +21,72 @@
 <body class="bg-dark">
     <div class="container-fluid">
         <div class="row p-5">
-            <div class="col">
-                <h1 class="text-center">Проверьте сайт на достоверность</h1>
+            <div class="col title">
+                <h1 class="ff-post text-center text-uppercase">Whaler</h1>
+                <h4 class="text-center">сервис антифишинга</h4>
             </div>
         </div>
         <div class="row d-flex justify-content-center p-5 pt-0">
             <div class="col-10">
-                <form class="p-5 pt-0" method="post">
-                    {% csrf_token %}
-                    <div class="row">
-                        <div class="col-10">
-                            <input type="text" name="address" class="form-control form-control-lg"
-                                placeholder="google.com">
+                <div class="bg-blur rounded-3 p-3">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-10">
+                                <input type="text" name="address" class="form-control form-control-lg"
+                                    placeholder="google.com" {% if address %}value="{{ address }}" {% endif %}>
+                            </div>
+                            <div class="col-2 d-grid">
+                                <button type="submit" class="btn btn-secondary fs-6">
+                                    <i class="fas fa-chevron-right"></i>
+                                </button>
+                            </div>
                         </div>
-                        <div class="col-2 d-grid">
-                            <button type="submit" class="btn btn-primary fs-6">
-                                <i class="fas fa-chevron-right"></i>
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <div class="row d-flex justify-content-center px-5">
-            <div class="col">
-                {% if result %}
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Проверка</th>
-                            <th scope="col">Результат</th>
-                            <th scope="col">Оценка</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for check in result.checks %}
-                        <tr>
-                            <th scope="row">{{ forloop.counter }}</th>
-                            <td>{{ check.name }}</td>
-                            <td>
-                                {% if check.result.phishing == 0 %}
-                                <span class="badge bg-success">{{ check.result.comment }}</span>
-                                {% elif check.result.phishing == 1%}
-                                <span class="badge bg-warning">{{ check.result.comment }}</span>
-                                {% elif check.result.phishing == 2%}
-                                <span class="badge bg-danger">{{ check.result.comment }}</span>
-                                {% endif %}
-                            </td>
-                            <td class="font-monospace">{{ check.result.score }}%</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-                <h4 class="display-6 text-end my-5">Итоговая оценка: <span
-                        class="font-monospace">{{ result.overall }}%</span></h4>
-                <div class="col d-grid my-5">
-                    <button class="btn btn-danger">Отметить как фишинг</button>
+                    </form>
                 </div>
-                {% endif %}
             </div>
         </div>
+        {% if result %}
+        <div class="row d-flex justify-content-center px-5 pb-5">
+            {% for check in result.checks %}
+            <div class="col-4">
+                <div class="card h-100 bg-blur rounded-3 p-3">
+                    <div class="card-body">
+                        <h4 class="text-center card-title">{{ check.name }}</h4>
+                    </div>
+                    <div class="card-footer">
+                        {% if check.result.phishing == 0 %}
+                        <p class="badge bg-success fs-5">{{ check.result.comment }}</p>
+                        {% elif check.result.phishing == 1%}
+                        <p class="badge bg-warning fs-5">{{ check.result.comment }}</span>
+                            {% elif check.result.phishing == 2%}
+                            <p class="badge bg-danger fs-5">{{ check.result.comment }}</p>
+                            {% endif %}
+                            <hr>
+                            <p class="text-end fs-5">Оценка угрозы <span
+                                    class="font-monospace">{{ check.result.score }}%</span></p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="row d-flex justify-content-center p-5">
+            <div class="col-10">
+                <div class="p-3 bg-blur">
+                    <h4 class="text-center">
+                        Итоговая оценка: <span class="font-monospace">{{ result.overall }}%</span> &#8213; Сайт безопасен
+                    </h4>
+                    <p>Считаете этот сайт опасным? <a class="href-black" href="#">Пометить как фишинг</a></p>
+                </div>
+            </div>
+        </div>
+        {% endif %}
     </div>
+
+    <footer class="bg-dark p-3">
+        <h6 class="text-center">&copy; 0b10m &#8213 {% now "Y" %}</h6>
+    </footer>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous">
     </script>
