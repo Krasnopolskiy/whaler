@@ -17,9 +17,9 @@ class DatabaseHeuristic(Heuristic):
     def process(self, address: str) -> Dict[str, int]:
         domain = self.extract_domain(address)
         with connections['phishing'].cursor() as cursor:
-            cursor.execute('SELECT domain FROM domains WHERE domain==%s OR domain==%s', [domain, address])
+            cursor.execute('SELECT domain FROM domains WHERE domain==%s OR domain==%s', [str(domain), str(address)])
             domain = cursor.fetchone()
-            cursor.execute('SELECT link FROM links WHERE link==%s OR link==%s', [domain, address])
+            cursor.execute('SELECT link FROM links WHERE link==%s OR link==%s', [str(domain), str(address)])
             link = cursor.fetchone()
             self.result = (
                 self.conditions['good']
